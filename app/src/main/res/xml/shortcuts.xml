@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_series_shortcut"
+        android:shortcutDisabledMessage="@string/page_title_series"
+        android:shortcutId="series"
+        android:shortcutLongLabel="@string/page_title_series"
+        android:shortcutShortLabel="@string/page_title_series">
+        <intent
+            android:action="ademar.tvmaze.action.series"
+            android:targetClass="ademar.tvmaze.StartActivity"
+            android:targetPackage="ademar.tvmaze" />
+    </shortcut>
+
+</shortcuts>
