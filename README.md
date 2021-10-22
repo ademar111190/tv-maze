@@ -2,6 +2,8 @@
 
 An android client for TV Maze content
 
+<img src="assets/ic_launcher-playstore.png" width="128" />
+
 ## Features
 
 - [ ] List all of the series contained in the API used by the paging scheme provided by the API.
