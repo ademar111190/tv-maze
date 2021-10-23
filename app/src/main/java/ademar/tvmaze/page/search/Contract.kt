@@ -15,6 +15,10 @@ interface Contract {
             val query: String,
         ) : Command()
 
+        data class SeriesSelected(
+            val id: Long,
+        ) : Command()
+
     }
 
     sealed class State {

@@ -2,12 +2,15 @@ package ademar.tvmaze.page.search
 
 import ademar.tvmaze.R
 import ademar.tvmaze.data.Show
+import ademar.tvmaze.tile.SeriesTileCallback
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(
+    private val callback: SeriesTileCallback,
+) : RecyclerView.Adapter<SearchViewHolder>() {
 
     private val data = mutableListOf<Show>()
 
@@ -17,7 +20,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return SearchViewHolder(inflater.inflate(R.layout.item_series, parent, false))
+        return SearchViewHolder(inflater.inflate(R.layout.item_series, parent, false), callback)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

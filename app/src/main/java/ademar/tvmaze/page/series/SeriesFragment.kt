@@ -4,6 +4,7 @@ import ademar.tvmaze.R
 import ademar.tvmaze.arch.ArchBinder
 import ademar.tvmaze.page.series.Contract.Command
 import ademar.tvmaze.page.series.Contract.Model
+import ademar.tvmaze.tile.SeriesTileCallback
 import ademar.tvmaze.widget.EdgeCaseContent.showContent
 import ademar.tvmaze.widget.EdgeCaseContent.showError
 import ademar.tvmaze.widget.EdgeCaseContent.showLoad
@@ -30,9 +31,13 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
     @Inject lateinit var interactor: SeriesInteractor
     @Inject lateinit var archBinder: ArchBinder
 
-    private val adapter = SeriesAdapter {
+    private val adapter = SeriesAdapter({
         output.onNext(Command.NextPage)
-    }
+    }, object : SeriesTileCallback {
+        override fun onItemClick(id: Long) {
+            output.onNext(Command.SeriesSelected(id))
+        }
+    })
 
     override val output: Subject<Command> = create()
 

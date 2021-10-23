@@ -15,6 +15,10 @@ interface Contract {
 
         object ChangeSort : Command()
 
+        data class SeriesSelected(
+            val id: Long,
+        ) : Command()
+
     }
 
     sealed class State {

@@ -11,9 +11,20 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class SeriesTile(
     private val itemView: View,
+    private val callback: SeriesTileCallback,
 ) {
 
+    private var currentId: Long? = null
+
+    init {
+        itemView.findViewById<View>(R.id.root).setOnClickListener {
+            currentId?.let(callback::onItemClick)
+        }
+    }
+
     fun bind(show: Show) {
+        currentId = show.id
+
         val name = itemView.findViewById<TextView>(R.id.name)
         val ratingValue = itemView.findViewById<TextView>(R.id.rating_value)
         val banner = itemView.findViewById<ImageView>(R.id.banner)
@@ -46,5 +57,11 @@ class SeriesTile(
             genre.visibility = View.INVISIBLE
         }
     }
+
+}
+
+interface SeriesTileCallback {
+
+    fun onItemClick(id: Long)
 
 }

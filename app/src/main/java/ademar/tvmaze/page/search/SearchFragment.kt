@@ -4,6 +4,7 @@ import ademar.tvmaze.R
 import ademar.tvmaze.arch.ArchBinder
 import ademar.tvmaze.page.search.Contract.Command
 import ademar.tvmaze.page.search.Contract.Model
+import ademar.tvmaze.tile.SeriesTileCallback
 import ademar.tvmaze.widget.AfterTextChanged
 import ademar.tvmaze.widget.EdgeCaseContent.showContent
 import ademar.tvmaze.widget.EdgeCaseContent.showError
@@ -40,7 +41,11 @@ class SearchFragment : Fragment(), Reselectable, Contract.View {
 
     private val termEmitter: Subject<String> = create()
 
-    private val adapter = SearchAdapter()
+    private val adapter = SearchAdapter(object : SeriesTileCallback {
+        override fun onItemClick(id: Long) {
+            output.onNext(Command.SeriesSelected(id))
+        }
+    })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.page_search, container, false)

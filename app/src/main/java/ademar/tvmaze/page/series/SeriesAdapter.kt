@@ -4,6 +4,7 @@ import ademar.tvmaze.R
 import ademar.tvmaze.data.Show
 import ademar.tvmaze.page.series.SeriesViewHolder.LoadViewHolder
 import ademar.tvmaze.page.series.SeriesViewHolder.SeriesItemViewHolder
+import ademar.tvmaze.tile.SeriesTileCallback
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SeriesAdapter(
     private val loadReachCallback: () -> Unit,
+    private val callback: SeriesTileCallback,
 ) : RecyclerView.Adapter<SeriesViewHolder>() {
 
     private val viewTypeItem = 1
@@ -29,7 +31,7 @@ class SeriesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return if (viewType == viewTypeItem) {
-            SeriesItemViewHolder(inflater.inflate(R.layout.item_series, parent, false))
+            SeriesItemViewHolder(inflater.inflate(R.layout.item_series, parent, false), callback)
         } else {
             LoadViewHolder(inflater.inflate(R.layout.item_load, parent, false))
         }

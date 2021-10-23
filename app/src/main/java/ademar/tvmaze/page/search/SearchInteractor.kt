@@ -4,6 +4,7 @@ import ademar.tvmaze.arch.ArchInteractor
 import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.COMPUTATION
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
+import ademar.tvmaze.page.detail.DetailNavigator
 import ademar.tvmaze.page.search.Contract.Command
 import ademar.tvmaze.page.search.Contract.State
 import ademar.tvmaze.usecase.SearchShows
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @ActivityScoped
 class SearchInteractor @Inject constructor(
     private val searchShows: SearchShows,
+    private val detailNavigator: DetailNavigator,
     subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -34,6 +36,7 @@ class SearchInteractor @Inject constructor(
     ): Observable<State> = when (command) {
         is Command.Initial -> initial()
         is Command.Search -> search(command.query)
+        is Command.SeriesSelected -> seriesSelected(command.id)
     }
 
     private fun initial(): Observable<State> {
@@ -54,6 +57,11 @@ class SearchInteractor @Inject constructor(
             }
             .toObservable()
             .onErrorResumeNext(::mapError)
+    }
+
+    private fun seriesSelected(id: Long): Observable<State> {
+        detailNavigator.openDetail(id)
+        return Observable.empty()
     }
 
 }

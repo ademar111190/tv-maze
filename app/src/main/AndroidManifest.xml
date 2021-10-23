@@ -32,6 +32,8 @@
 
         <activity android:name=".HomeActivity" />
 
+        <activity android:name=".page.detail.DetailActivity" />
+
     </application>
 
 </manifest>

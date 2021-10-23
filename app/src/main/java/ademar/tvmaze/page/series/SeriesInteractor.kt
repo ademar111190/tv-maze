@@ -6,6 +6,7 @@ import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.COMPUTATION
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
 import ademar.tvmaze.ext.valueOrError
+import ademar.tvmaze.page.detail.DetailNavigator
 import ademar.tvmaze.page.series.Contract.Command
 import ademar.tvmaze.page.series.Contract.State
 import ademar.tvmaze.usecase.FetchShows
@@ -21,6 +22,7 @@ import javax.inject.Inject
 @FragmentScoped
 class SeriesInteractor @Inject constructor(
     private val fetchShows: FetchShows,
+    private val detailNavigator: DetailNavigator,
     subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -38,6 +40,7 @@ class SeriesInteractor @Inject constructor(
         is Command.Initial -> initial()
         is Command.NextPage -> nextPage()
         is Command.ChangeSort -> changeSort()
+        is Command.SeriesSelected -> seriesSelected(command.id)
     }
 
     private var currentPage = 0
@@ -164,6 +167,11 @@ class SeriesInteractor @Inject constructor(
             }
             .map(::sortedShows)
             .toObservable()
+    }
+
+    private fun seriesSelected(id: Long): Observable<State> {
+        detailNavigator.openDetail(id)
+        return empty()
     }
 
     private fun mergeSeries(base: List<Show>, state: State): List<Show> {
