@@ -2,10 +2,12 @@ package ademar.tvmaze.data
 
 import ademar.tvmaze.R
 import androidx.annotation.DrawableRes
+import timber.log.Timber
 
 enum class Genre(
     @DrawableRes val icon: Int,
 ) {
+
     ACTION(R.drawable.ic_genre_action),
     ADVENTURE(R.drawable.ic_genre_adventure),
     ANIME(R.drawable.ic_genre_anime),
@@ -27,5 +29,41 @@ enum class Genre(
     SUPERNATURAL(R.drawable.ic_genre_supernatural),
     THRILLER(R.drawable.ic_genre_thriller),
     WAR(R.drawable.ic_genre_war),
-    WESTERN(R.drawable.ic_genre_western),
+    WESTERN(R.drawable.ic_genre_western);
+
+    companion object {
+
+        fun fromKeyword(keyword: String?): Genre? {
+            return when (keyword?.lowercase()) {
+                "action" -> ACTION
+                "adventure" -> ADVENTURE
+                "anime" -> ANIME
+                "comedy" -> COMEDY
+                "crime" -> CRIME
+                "drama" -> DRAMA
+                "espionage" -> ESPIONAGE
+                "family" -> FAMILY
+                "fantasy" -> FANTASY
+                "history" -> HISTORY
+                "horror" -> HORROR
+                "legal" -> LEGAL
+                "medical" -> MEDICAL
+                "music" -> MUSIC
+                "mystery" -> MYSTERY
+                "romance" -> ROMANCE
+                "science-fiction" -> SCIENCE_FICTION
+                "sports" -> SPORTS
+                "supernatural" -> SUPERNATURAL
+                "thriller" -> THRILLER
+                "war" -> WAR
+                "western" -> WESTERN
+                else -> {
+                    Timber.w("Unknown genre keyword $keyword")
+                    null
+                }
+            }
+        }
+
+    }
+
 }
