@@ -6,7 +6,7 @@ An android client for TV Maze content
 
 ## Features
 
-- [ ] List all of the series contained in the API used by the paging scheme provided by the API.
+- [X] List all of the series contained in the API used by the paging scheme provided by the API.
 - [ ] Allow users to search series by name.
 - [ ] The listing and search views must show at least the name and poster image of the series.
 - [ ] After clicking on a series, the application should show the details of the series, showing the following information:

@@ -8,4 +8,10 @@
         android:title="@string/series_menu_go_to_end"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_series_sort"
+        android:icon="@drawable/ic_series_sort"
+        android:title="@string/series_menu_sort"
+        app:showAsAction="ifRoom" />
+
 </menu>

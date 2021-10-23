@@ -3,6 +3,7 @@
     <string name="page_title_series">Series</string>
     <string name="page_title_series_enumerated">Series (%d)</string>
     <string name="series_menu_go_to_end">Go to end</string>
+    <string name="series_menu_sort">Change sort rule</string>
     <string name="cd_series_banner">Series banner</string>
     <string name="cd_series_language">Series language</string>
     <string name="cd_series_genre">Series genre</string>

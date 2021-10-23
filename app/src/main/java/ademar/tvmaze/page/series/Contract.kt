@@ -13,6 +13,8 @@ interface Contract {
 
         object NextPage : Command()
 
+        object ChangeSort : Command()
+
     }
 
     sealed class State {
@@ -20,7 +22,7 @@ interface Contract {
         data class DataState(
             val series: List<Show>,
             val hasNextPage: Boolean,
-            val sortOption: SortOption = SortOption.ID,
+            val sortOption: SortOption,
         ) : State()
 
         data class ErrorState(

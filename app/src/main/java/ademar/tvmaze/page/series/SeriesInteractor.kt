@@ -37,6 +37,7 @@ class SeriesInteractor @Inject constructor(
     ): Observable<State> = when (command) {
         is Command.Initial -> initial()
         is Command.NextPage -> nextPage()
+        is Command.ChangeSort -> changeSort()
     }
 
     private var currentPage = 0
@@ -55,6 +56,7 @@ class SeriesInteractor @Inject constructor(
                 State.DataState(
                     series = shows,
                     hasNextPage = false,
+                    sortOption = Contract.SortOption.ID,
                 )
             }
             .map(::sortedShows)
@@ -66,12 +68,22 @@ class SeriesInteractor @Inject constructor(
             .flatMapObservable { state ->
                 var observer = fetchShows.firstPage()
                     .flatMapObservable<State> { shows ->
-                        just(
-                            State.DataState(
-                                series = mergeSeries(shows, state),
-                                hasNextPage = true,
+                        if (state is State.DataState) {
+                            just(
+                                state.copy(
+                                    series = mergeSeries(shows, state),
+                                    hasNextPage = true,
+                                )
                             )
-                        )
+                        } else {
+                            just(
+                                State.DataState(
+                                    series = shows,
+                                    hasNextPage = true,
+                                    sortOption = Contract.SortOption.ID,
+                                )
+                            )
+                        }
                     }
                     .map(::sortedShows)
                 observer = if (state is State.DataState && state.series.isNotEmpty()) {
@@ -93,26 +105,27 @@ class SeriesInteractor @Inject constructor(
         currentPage++
 
         return fetchShows.numberedPage(currentPage)
-            .map { shows ->
-                State.DataState(
-                    series = shows,
-                    hasNextPage = true,
-                )
-            }
-            .flatMap<State> { newState ->
+            .flatMapObservable { shows ->
                 output.valueOrError()
-                    .map { lastState ->
-                        newState.copy(
-                            series = mergeSeries(newState.series, lastState),
-                        )
+                    .flatMapObservable<State> { lastState ->
+                        if (lastState is State.DataState) {
+                            just(
+                                lastState.copy(
+                                    series = mergeSeries(shows, lastState),
+                                )
+                            )
+                        } else {
+                            just(
+                                State.DataState(
+                                    series = shows,
+                                    hasNextPage = true,
+                                    sortOption = Contract.SortOption.ID,
+                                )
+                            )
+                        }
                     }
-                    .onErrorReturn {
-                        newState.copy(
-                            hasNextPage = false,
-                        )
-                    }
+                    .onErrorResumeNext(::mapError)
             }
-            .toObservable()
             .onErrorResumeNext { error ->
                 output.valueOrError()
                     .flatMapObservable { lastState ->
@@ -132,6 +145,25 @@ class SeriesInteractor @Inject constructor(
             .doOnNext {
                 waitingNextPage = false
             }
+    }
+
+    private fun changeSort(): Observable<State> {
+        return output.valueOrError()
+            .map { state ->
+                if (state is State.DataState) {
+                    state.copy(
+                        sortOption = if (state.sortOption == Contract.SortOption.ID) {
+                            Contract.SortOption.NAME
+                        } else {
+                            Contract.SortOption.ID
+                        }
+                    )
+                } else {
+                    state
+                }
+            }
+            .map(::sortedShows)
+            .toObservable()
     }
 
     private fun mergeSeries(base: List<Show>, state: State): List<Show> {

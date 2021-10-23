@@ -19,8 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject.create
 import io.reactivex.rxjava3.subjects.Subject
-import java.lang.Integer.max
 import javax.inject.Inject
+import kotlin.math.max
 
 @AndroidEntryPoint
 class SeriesFragment : Fragment(), Reselectable, Contract.View {
@@ -49,6 +49,7 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_series_go_to_end -> list.scrollToPosition(max(adapter.itemCount - 1, 0))
+                R.id.action_series_sort -> output.onNext(Command.ChangeSort)
                 else -> null
             } != null
         }
