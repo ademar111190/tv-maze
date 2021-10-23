@@ -30,6 +30,9 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField "String", "TV_MAZE_ROOT_URL", "\"https://api.tvmaze.com/\""
+        }
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
