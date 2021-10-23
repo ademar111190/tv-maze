@@ -4,18 +4,20 @@ import ademar.tvmaze.R
 import ademar.tvmaze.arch.ArchBinder
 import ademar.tvmaze.page.series.Contract.Command
 import ademar.tvmaze.page.series.Contract.Model
+import ademar.tvmaze.widget.EdgeCaseContent.showContent
+import ademar.tvmaze.widget.EdgeCaseContent.showError
+import ademar.tvmaze.widget.EdgeCaseContent.showLoad
 import ademar.tvmaze.widget.Reselectable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject.create
 import io.reactivex.rxjava3.subjects.Subject
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,6 +28,8 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
     @Inject lateinit var interactor: SeriesInteractor
     @Inject lateinit var archBinder: ArchBinder
 
+    private val adapter = SeriesAdapter()
+
     override val output: Subject<Command> = create()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +38,7 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.findViewById<RecyclerView>(R.id.list).adapter = adapter
         archBinder.bind(this, interactor, presenter)
     }
 
@@ -43,12 +48,22 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
     }
 
     override fun onReselected() {
-        Timber.d("onReselected") // TODO
+        view?.findViewById<RecyclerView>(R.id.list)?.scrollToPosition(0)
     }
 
     override fun render(model: Model) {
         val view = view ?: return
-        view.findViewById<TextView>(R.id.txt).text = "$model"
+        val edgeCaseContent = view.findViewById<View>(R.id.edge_case_content)
+        val content = view.findViewById<RecyclerView>(R.id.list)
+
+        when (model) {
+            is Model.LoadModel -> showLoad(edgeCaseContent, content)
+            is Model.Error -> showError(edgeCaseContent, content, model.message)
+            is Model.DataModel -> {
+                showContent(edgeCaseContent, content)
+                adapter.setItems(model.series)
+            }
+        }
     }
 
 }

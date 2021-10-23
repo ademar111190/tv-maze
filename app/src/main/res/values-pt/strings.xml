@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TV Maze</string>
     <string name="page_title_series">Séries</string>
+    <string name="cd_series_banner">Banner da série</string>
+    <string name="cd_series_language">Idioma da série</string>
+    <string name="cd_series_genre">Gênero da série</string>
+    <string name="cd_series_rating">Nota da série</string>
 </resources>
