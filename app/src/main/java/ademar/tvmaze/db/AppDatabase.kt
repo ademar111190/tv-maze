@@ -6,6 +6,7 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [
         GenreEntity::class,
+        ScheduleDayEntity::class,
         ShowEntity::class,
     ],
     version = 1,

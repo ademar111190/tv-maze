@@ -37,6 +37,13 @@ class SaveShows @Inject constructor(
                                         .subscribe({}, Timber::e)
                                 )
                             }
+                            showWithGenre.scheduleDays.onEach {
+                                subscriptions.add(
+                                    dao.insert(it)
+                                        .subscribeOn(ioScheduler)
+                                        .subscribe({}, Timber::e)
+                                )
+                            }
                         }
                         .subscribe({}, Timber::e)
                 )

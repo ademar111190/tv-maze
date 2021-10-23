@@ -2,10 +2,12 @@ package ademar.tvmaze.usecase
 
 import ademar.tvmaze.data.Genre
 import ademar.tvmaze.data.Language
+import ademar.tvmaze.data.ScheduleDay
 import ademar.tvmaze.data.Show
 import ademar.tvmaze.db.GenreEntity
+import ademar.tvmaze.db.ScheduleDayEntity
 import ademar.tvmaze.db.ShowEntity
-import ademar.tvmaze.db.ShowWithGenre
+import ademar.tvmaze.db.ShowWithGenreWithScheduleDay
 import ademar.tvmaze.network.payload.ShowItem
 import dagger.Reusable
 import javax.inject.Inject
@@ -20,6 +22,9 @@ class MapShows @Inject constructor() {
         val language = item.language ?: return null
         val genres = item.genres?.mapNotNull { Genre.fromKeyword(it) }?.sorted() ?: emptyList()
         val rating = item.rating?.average ?: return null
+        val summary = item.summary ?: return null
+        val time = item.schedule?.time ?: return null
+        val days = item.schedule.days?.mapNotNull { ScheduleDay.fromDay(it) }?.sorted() ?: emptyList()
         return Show(
             id = id,
             name = name,
@@ -27,17 +32,22 @@ class MapShows @Inject constructor() {
             language = Language.fromKeyword(language),
             genres = genres,
             rating = rating,
+            summary = summary,
+            time = time,
+            days = days,
         )
     }
 
-    fun mapShow(show: Show): ShowWithGenre {
-        return ShowWithGenre(
+    fun mapShow(show: Show): ShowWithGenreWithScheduleDay {
+        return ShowWithGenreWithScheduleDay(
             show = ShowEntity(
                 id = show.id,
                 name = show.name,
                 image = show.image,
                 language = show.language,
                 rating = show.rating,
+                summary = show.summary,
+                time = show.time,
             ),
             genres = show.genres.map {
                 GenreEntity(
@@ -45,17 +55,26 @@ class MapShows @Inject constructor() {
                     genre = it,
                 )
             },
+            scheduleDays = show.days.map {
+                ScheduleDayEntity(
+                    showId = show.id,
+                    scheduleDay = it,
+                )
+            },
         )
     }
 
-    fun mapShow(showWithGenre: ShowWithGenre): Show {
+    fun mapShow(showEntity: ShowWithGenreWithScheduleDay): Show {
         return Show(
-            id = showWithGenre.show.id,
-            name = showWithGenre.show.name,
-            image = showWithGenre.show.image,
-            language = showWithGenre.show.language,
-            genres = showWithGenre.genres.map { it.genre }.sorted(),
-            rating = showWithGenre.show.rating,
+            id = showEntity.show.id,
+            name = showEntity.show.name,
+            image = showEntity.show.image,
+            language = showEntity.show.language,
+            genres = showEntity.genres.map { it.genre }.sorted(),
+            rating = showEntity.show.rating,
+            summary = showEntity.show.summary,
+            time = showEntity.show.time,
+            days = showEntity.scheduleDays.map { it.scheduleDay }.sorted(),
         )
     }
 
