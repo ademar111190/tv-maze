@@ -26,8 +26,7 @@ An android client for TV Maze content
 ## Optional Features
 
 - [ ] Allow the user to set a PIN number to secure the application and prevent unauthorized users.
-- [ ] For supported phones, the user must be able to choose if they want to enable fingerprint authentication to avoid typing
-  the PIN number while opening the app.
+- [ ] For supported phones, the user must be able to choose if they want to enable fingerprint authentication to avoid typing the PIN number while opening the app.
 - [ ] Allow the user to save a series as a favorite.
 - [ ] Allow the user to delete a series from the favorites list.
 - [ ] Allow the user to browse their favorite series in alphabetical order, and click on one to see its details.
@@ -36,3 +35,7 @@ An android client for TV Maze content
     - Name
     - Image
     - Series they have participated in, with a link to the series details.
+
+## Language icons
+
+Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
