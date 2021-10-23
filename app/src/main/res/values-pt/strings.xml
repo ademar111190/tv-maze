@@ -2,8 +2,11 @@
     <string name="app_name">TV Maze</string>
     <string name="page_title_series">Séries</string>
     <string name="page_title_series_enumerated">Séries (%d)</string>
+    <string name="page_title_search">Busca</string>
     <string name="series_menu_go_to_end">Ir ao final</string>
     <string name="series_menu_sort">Alterar regra de ordenação</string>
+    <string name="search_menu_clear">Limpar</string>
+    <string name="search_menu_voice">Busca por voz</string>
     <string name="cd_series_banner">Banner da série</string>
     <string name="cd_series_language">Idioma da série</string>
     <string name="cd_series_genre">Gênero da série</string>

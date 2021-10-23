@@ -26,4 +26,10 @@
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
 
+    <style name="ToolbarEditTextStyle"
+        parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+
 </resources>

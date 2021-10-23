@@ -16,4 +16,17 @@
             android:targetPackage="ademar.tvmaze" />
     </shortcut>
 
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_search_shortcut"
+        android:shortcutDisabledMessage="@string/page_title_search"
+        android:shortcutId="search"
+        android:shortcutLongLabel="@string/page_title_search"
+        android:shortcutShortLabel="@string/page_title_search">
+        <intent
+            android:action="ademar.tvmaze.action.search"
+            android:targetClass="ademar.tvmaze.StartActivity"
+            android:targetPackage="ademar.tvmaze" />
+    </shortcut>
+
 </shortcuts>

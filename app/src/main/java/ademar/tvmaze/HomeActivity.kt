@@ -1,5 +1,6 @@
 package ademar.tvmaze
 
+import ademar.tvmaze.page.search.SearchFragment
 import ademar.tvmaze.page.series.SeriesFragment
 import ademar.tvmaze.widget.Reselectable
 import android.os.Bundle
@@ -45,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager.popBackStackImmediate(null, POP_BACK_STACK_INCLUSIVE)
                     SeriesFragment()
                 }
+                R.id.navigation_search -> SearchFragment()
                 else -> null
             }
             if (fragment != null) {
@@ -57,12 +59,13 @@ class HomeActivity : AppCompatActivity() {
                 transaction.addToBackStack("$fragment")
                 transaction.commitAllowingStateLoss()
             }
-            fragment != null
+            false
         }
         navigation.selectedItemId = R.id.navigation_series
         supportFragmentManager.addOnBackStackChangedListener {
             val id = when (supportFragmentManager.fragments.lastOrNull()) {
                 is SeriesFragment -> R.id.navigation_series
+                is SearchFragment -> R.id.navigation_search
                 else -> null
             }
             if (id != null) {
@@ -70,7 +73,8 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         val initial = when (intent?.extras?.getString("INITIAL_ACTION", null)) {
-            "ademar.tvmaze.series" -> R.id.navigation_series
+            "ademar.tvmaze.action.series" -> R.id.navigation_series
+            "ademar.tvmaze.action.search" -> R.id.navigation_search
             else -> null
         }
         if (initial != null) {
