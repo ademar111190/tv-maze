@@ -39,6 +39,10 @@ interface ShowDao {
     @Query("SELECT * FROM shows")
     fun getAll(): Single<List<ShowWithGenre>>
 
+    @Transaction
+    @Query("SELECT * FROM shows WHERE name LIKE '%' || :query || '%'")
+    fun search(query: String): Single<List<ShowWithGenre>>
+
     @Insert(onConflict = REPLACE)
     fun insert(show: ShowEntity): Completable
 

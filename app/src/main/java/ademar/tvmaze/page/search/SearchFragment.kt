@@ -1,7 +1,13 @@
 package ademar.tvmaze.page.search
 
 import ademar.tvmaze.R
+import ademar.tvmaze.arch.ArchBinder
+import ademar.tvmaze.page.search.Contract.Command
+import ademar.tvmaze.page.search.Contract.Model
 import ademar.tvmaze.widget.AfterTextChanged
+import ademar.tvmaze.widget.EdgeCaseContent.showContent
+import ademar.tvmaze.widget.EdgeCaseContent.showError
+import ademar.tvmaze.widget.EdgeCaseContent.showLoad
 import ademar.tvmaze.widget.Reselectable
 import android.content.Intent
 import android.os.Bundle
@@ -23,11 +29,18 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(), Reselectable {
+class SearchFragment : Fragment(), Reselectable, Contract.View {
 
-    @Inject lateinit var subscriptions: CompositeDisposable
+    @Inject override lateinit var subscriptions: CompositeDisposable
+    @Inject lateinit var presenter: SearchPresenter
+    @Inject lateinit var interactor: SearchInteractor
+    @Inject lateinit var archBinder: ArchBinder
+
+    override val output: Subject<Command> = create()
 
     private val termEmitter: Subject<String> = create()
+
+    private val adapter = SearchAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.page_search, container, false)
@@ -38,6 +51,9 @@ class SearchFragment : Fragment(), Reselectable {
 
         val searchField = view.findViewById<EditText>(R.id.search_field)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        val list = view.findViewById<RecyclerView>(R.id.list)
+
+        list.adapter = adapter
 
         searchField.addTextChangedListener(AfterTextChanged(::onSearchChanged))
 
@@ -55,6 +71,8 @@ class SearchFragment : Fragment(), Reselectable {
                 else -> null
             } != null
         }
+
+        archBinder.bind(this, interactor, presenter)
     }
 
     override fun onResume() {
@@ -62,10 +80,10 @@ class SearchFragment : Fragment(), Reselectable {
         subscriptions.add(
             termEmitter
                 .throttleWithTimeout(1000, TimeUnit.MILLISECONDS)
-                .subscribe({
-                    Timber.d("TODO search $it")
-                }, Timber::e)
+                .map(Command::Search)
+                .subscribe(output::onNext, Timber::e)
         )
+        output.onNext(Command.Initial)
         onSearchChanged(view?.findViewById<EditText>(R.id.search_field)?.text?.toString() ?: "")
     }
 
@@ -100,6 +118,22 @@ class SearchFragment : Fragment(), Reselectable {
             voice.isVisible = false
         }
         termEmitter.onNext(term)
+    }
+
+    override fun render(model: Model) {
+        val view = view ?: return
+        val edgeCaseContent = view.findViewById<View>(R.id.edge_case_content)
+        val content = view.findViewById<RecyclerView>(R.id.list)
+
+        when (model) {
+            is Model.Loading -> showLoad(edgeCaseContent, content)
+            is Model.Error -> showError(edgeCaseContent, content, model.message)
+            is Model.Empty -> showError(edgeCaseContent, content, model.message)
+            is Model.DataModel -> {
+                showContent(edgeCaseContent, content)
+                adapter.setItems(model.series)
+            }
+        }
     }
 
 }

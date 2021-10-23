@@ -7,6 +7,8 @@
     <string name="series_menu_sort">Change sort rule</string>
     <string name="search_menu_clear">Clear</string>
     <string name="search_menu_voice">Voice search</string>
+    <string name="search_empty">Write the name of the series on the field above.</string>
+    <string name="search_not_found">No series found.</string>
     <string name="cd_series_banner">Series banner</string>
     <string name="cd_series_language">Series language</string>
     <string name="cd_series_genre">Series genre</string>

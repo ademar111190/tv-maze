@@ -1,6 +1,7 @@
 package ademar.tvmaze.usecase
 
 import ademar.tvmaze.data.Show
+import ademar.tvmaze.db.AppDatabase
 import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.IO
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @Reusable
 class SearchShows @Inject constructor(
     private val service: TvMazeService,
+    private val db: AppDatabase,
     private val mapShows: MapShows,
     private val saveShows: SaveShows,
     @QualifiedScheduler(IO) private val ioScheduler: Scheduler,
@@ -26,5 +28,14 @@ class SearchShows @Inject constructor(
             payload.mapNotNull { it.show }.mapNotNull(mapShows::mapShow)
         }
         .doOnSuccess(saveShows::save)
+        .onErrorResumeNext {
+            // failed to search by api, try the best by search on local database
+            db.showDao().search(query)
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
+                .map { entity ->
+                    entity.map(mapShows::mapShow)
+                }
+        }
 
 }

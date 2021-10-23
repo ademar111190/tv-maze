@@ -7,6 +7,8 @@
     <string name="series_menu_sort">Alterar regra de ordenação</string>
     <string name="search_menu_clear">Limpar</string>
     <string name="search_menu_voice">Busca por voz</string>
+    <string name="search_empty">Escreva o nome da série no campo de busca acima.</string>
+    <string name="search_not_found">Nenhuma série encontrada.</string>
     <string name="cd_series_banner">Banner da série</string>
     <string name="cd_series_language">Idioma da série</string>
     <string name="cd_series_genre">Gênero da série</string>
