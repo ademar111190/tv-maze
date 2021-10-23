@@ -8,11 +8,15 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Singleton
 
 @[Module InstallIn(SingletonComponent::class)]
 object RxModule {
+
+    @Provides
+    fun providesCompositeDisposable() = CompositeDisposable()
 
     @[Provides Singleton QualifiedScheduler(IO)]
     fun providesSchedulerIo(): Scheduler = Schedulers.io()
