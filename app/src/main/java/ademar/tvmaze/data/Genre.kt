@@ -1,0 +1,26 @@
+package ademar.tvmaze.data
+
+enum class Genre {
+    ACTION,
+    ADVENTURE,
+    ANIME,
+    COMEDY,
+    CRIME,
+    DRAMA,
+    ESPIONAGE,
+    FAMILY,
+    FANTASY,
+    HISTORY,
+    HORROR,
+    LEGAL,
+    MEDICAL,
+    MUSIC,
+    MYSTERY,
+    ROMANCE,
+    SCIENCE_FICTION,
+    SPORTS,
+    SUPERNATURAL,
+    THRILLER,
+    WAR,
+    WESTERN,
+}
