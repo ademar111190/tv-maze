@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_scrollFlags="scroll|enterAlways"
+            app:menu="@menu/series_menu_toolbar"
             app:title="@string/page_title_series" />
 
     </com.google.android.material.appbar.AppBarLayout>

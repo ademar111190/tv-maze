@@ -18,7 +18,9 @@ interface Contract {
     sealed class State {
 
         data class DataState(
-            val series: List<Show>
+            val series: List<Show>,
+            val hasNextPage: Boolean,
+            val sortOption: SortOption = SortOption.ID,
         ) : State()
 
         data class ErrorState(
@@ -34,6 +36,7 @@ interface Contract {
         data class DataModel(
             val title: String,
             val series: List<Show>,
+            val showNextLoad: Boolean,
         ) : Model()
 
         data class Error(
@@ -41,6 +44,11 @@ interface Contract {
             val message: String,
         ) : Model()
 
+    }
+
+    enum class SortOption {
+        ID,
+        NAME,
     }
 
 }

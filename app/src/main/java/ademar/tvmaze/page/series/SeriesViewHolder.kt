@@ -12,42 +12,52 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class SeriesViewHolder(
+sealed class SeriesViewHolder(
     itemView: View,
 ) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(show: Show) {
-        val name = itemView.findViewById<TextView>(R.id.name)
-        val ratingValue = itemView.findViewById<TextView>(R.id.rating_value)
-        val banner = itemView.findViewById<ImageView>(R.id.banner)
-        val language = itemView.findViewById<ImageView>(R.id.language)
-        val genre1 = itemView.findViewById<ImageView>(R.id.genre_1)
-        val genre2 = itemView.findViewById<ImageView>(R.id.genre_2)
-        val genre3 = itemView.findViewById<ImageView>(R.id.genre_3)
+    class LoadViewHolder(
+        itemView: View,
+    ) : SeriesViewHolder(itemView)
 
-        name.text = show.name
-        ratingValue.text = show.rating.toString()
-        language.setImageResource(show.language.icon)
+    class SeriesItemViewHolder(
+        itemView: View,
+    ) : SeriesViewHolder(itemView) {
 
-        applyGenre(show.genres, genre3, 2)
-        applyGenre(show.genres, genre2, 1)
-        applyGenre(show.genres, genre1, 0)
+        fun bind(show: Show) {
+            val name = itemView.findViewById<TextView>(R.id.name)
+            val ratingValue = itemView.findViewById<TextView>(R.id.rating_value)
+            val banner = itemView.findViewById<ImageView>(R.id.banner)
+            val language = itemView.findViewById<ImageView>(R.id.language)
+            val genre1 = itemView.findViewById<ImageView>(R.id.genre_1)
+            val genre2 = itemView.findViewById<ImageView>(R.id.genre_2)
+            val genre3 = itemView.findViewById<ImageView>(R.id.genre_3)
 
-        Glide.with(itemView)
-            .load(show.image)
-            .centerCrop()
-            .placeholder(R.mipmap.ic_launcher_background)
-            .transition(DrawableTransitionOptions.withCrossFade(200))
-            .into(banner)
-    }
+            name.text = show.name
+            ratingValue.text = show.rating.toString()
+            language.setImageResource(show.language.icon)
 
-    private fun applyGenre(genres: List<Genre>, genre: ImageView, index: Int) {
-        if (genres.size > index) {
-            genre.setImageResource(genres[index].icon)
-            genre.visibility = VISIBLE
-        } else {
-            genre.visibility = INVISIBLE
+            applyGenre(show.genres, genre3, 2)
+            applyGenre(show.genres, genre2, 1)
+            applyGenre(show.genres, genre1, 0)
+
+            Glide.with(itemView)
+                .load(show.image)
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_background)
+                .transition(DrawableTransitionOptions.withCrossFade(200))
+                .into(banner)
         }
+
+        private fun applyGenre(genres: List<Genre>, genre: ImageView, index: Int) {
+            if (genres.size > index) {
+                genre.setImageResource(genres[index].icon)
+                genre.visibility = VISIBLE
+            } else {
+                genre.visibility = INVISIBLE
+            }
+        }
+
     }
 
 }

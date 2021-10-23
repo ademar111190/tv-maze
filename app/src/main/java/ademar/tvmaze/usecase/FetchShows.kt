@@ -33,7 +33,11 @@ class FetchShows @Inject constructor(
             entity.map(::mapShow)
         }
 
-    fun firstPage(): Single<List<Show>> = service.shows()
+    fun firstPage(): Single<List<Show>> = fetch(service.shows())
+
+    fun numberedPage(page: Int): Single<List<Show>> = fetch(service.shows(page))
+
+    private fun fetch(source: Single<List<ShowItem>>): Single<List<Show>> = source
         .subscribeOn(ioScheduler)
         .observeOn(mainThreadScheduler)
         .map { payload ->

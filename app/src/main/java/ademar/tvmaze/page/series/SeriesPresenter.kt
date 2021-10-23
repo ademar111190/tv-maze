@@ -34,6 +34,7 @@ class SeriesPresenter @Inject constructor(
             is State.DataState -> Model.DataModel(
                 title = context.getString(R.string.page_title_series_enumerated, state.series.size),
                 series = state.series,
+                showNextLoad = state.hasNextPage,
             )
             is State.ErrorState -> Model.Error(
                 title = context.getString(R.string.page_title_series),

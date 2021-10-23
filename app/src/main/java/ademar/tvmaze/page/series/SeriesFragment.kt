@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject.create
 import io.reactivex.rxjava3.subjects.Subject
+import java.lang.Integer.max
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,7 +30,9 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
     @Inject lateinit var interactor: SeriesInteractor
     @Inject lateinit var archBinder: ArchBinder
 
-    private val adapter = SeriesAdapter()
+    private val adapter = SeriesAdapter {
+        output.onNext(Command.NextPage)
+    }
 
     override val output: Subject<Command> = create()
 
@@ -39,7 +42,16 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<RecyclerView>(R.id.list).adapter = adapter
+        val list = view.findViewById<RecyclerView>(R.id.list)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+
+        list.adapter = adapter
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_series_go_to_end -> list.scrollToPosition(max(adapter.itemCount - 1, 0))
+                else -> null
+            } != null
+        }
         archBinder.bind(this, interactor, presenter)
     }
 
@@ -66,7 +78,7 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
             }
             is Model.DataModel -> {
                 showContent(edgeCaseContent, content)
-                adapter.setItems(model.series)
+                adapter.setItems(model.series, model.showNextLoad)
                 toolbar.title = model.title
             }
         }
