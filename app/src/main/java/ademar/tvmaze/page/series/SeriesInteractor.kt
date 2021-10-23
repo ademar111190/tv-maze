@@ -38,17 +38,18 @@ class SeriesInteractor @Inject constructor(
 
     private fun initial(): Observable<State> {
         return fetchShows.cached()
-            .doOnSuccess { shows ->
-                if (shows.isNotEmpty()) {
-                    output.onNext(
-                        State.DataState(
-                            series = shows,
-                        )
-                    )
+            .map { shows ->
+                State.DataState(
+                    series = shows,
+                )
+            }
+            .doOnSuccess { state ->
+                if (state is State.DataState && state.series.isNotEmpty()) {
+                    output.onNext(state)
                 }
             }
-            .flatMapObservable {
-                fetchShows.firstPage()
+            .flatMapObservable { state ->
+                var observer = fetchShows.firstPage()
                     .flatMapObservable<State> { shows ->
                         just(
                             State.DataState(
@@ -56,7 +57,12 @@ class SeriesInteractor @Inject constructor(
                             )
                         )
                     }
-                    .onErrorResumeNext(::mapError)
+                observer = if (state is State.DataState && state.series.isNotEmpty()) {
+                    observer.onErrorReturn { state }
+                } else {
+                    observer.onErrorResumeNext(::mapError)
+                }
+                observer
             }
     }
 

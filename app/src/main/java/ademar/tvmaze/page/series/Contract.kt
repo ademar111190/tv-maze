@@ -32,10 +32,12 @@ interface Contract {
         object LoadModel : Model()
 
         data class DataModel(
+            val title: String,
             val series: List<Show>,
         ) : Model()
 
         data class Error(
+            val title: String,
             val message: String,
         ) : Model()
 

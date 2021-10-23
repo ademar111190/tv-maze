@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,15 +54,20 @@ class SeriesFragment : Fragment(), Reselectable, Contract.View {
 
     override fun render(model: Model) {
         val view = view ?: return
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         val edgeCaseContent = view.findViewById<View>(R.id.edge_case_content)
         val content = view.findViewById<RecyclerView>(R.id.list)
 
         when (model) {
             is Model.LoadModel -> showLoad(edgeCaseContent, content)
-            is Model.Error -> showError(edgeCaseContent, content, model.message)
+            is Model.Error -> {
+                showError(edgeCaseContent, content, model.message)
+                toolbar.title = model.title
+            }
             is Model.DataModel -> {
                 showContent(edgeCaseContent, content)
                 adapter.setItems(model.series)
+                toolbar.title = model.title
             }
         }
     }
