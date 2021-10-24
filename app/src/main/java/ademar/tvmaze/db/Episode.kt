@@ -13,7 +13,7 @@ data class EpisodeEntity(
     @ColumnInfo(name = "summary") val summary: String,
     @ColumnInfo(name = "season") val season: Int,
     @ColumnInfo(name = "number") val number: Int,
-    @ColumnInfo(name = "image") val image: String,
+    @ColumnInfo(name = "image") val image: String?,
 )
 
 @Dao
