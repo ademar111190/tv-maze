@@ -16,6 +16,8 @@ interface Contract {
 
         object EpisodesClick : Command()
 
+        object None : Command()
+
     }
 
     sealed class State {

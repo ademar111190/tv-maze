@@ -9,12 +9,13 @@ import ademar.tvmaze.ext.valueOrError
 import ademar.tvmaze.page.detail.Contract.Command
 import ademar.tvmaze.page.detail.Contract.EpisodesStatus.*
 import ademar.tvmaze.page.detail.Contract.State
+import ademar.tvmaze.page.seasons.SeasonNavigator
 import ademar.tvmaze.usecase.FetchEpisodes
 import ademar.tvmaze.usecase.FetchSeasons
 import ademar.tvmaze.usecase.FetchShow
-import android.util.Log
 import dagger.hilt.android.scopes.ActivityScoped
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observable.empty
 import io.reactivex.rxjava3.core.Observable.just
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -27,6 +28,7 @@ class DetailInteractor @Inject constructor(
     private val fetchShow: FetchShow,
     private val fetchSeasons: FetchSeasons,
     private val fetchEpisodes: FetchEpisodes,
+    private val seasonNavigator: SeasonNavigator,
     private val subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -43,6 +45,7 @@ class DetailInteractor @Inject constructor(
     ): Observable<State> = when (command) {
         is Command.Initial -> initial(command.id)
         is Command.EpisodesClick -> episodesClick()
+        is Command.None -> empty()
     }
 
     private fun initial(id: Long?): Observable<State> {
@@ -67,8 +70,7 @@ class DetailInteractor @Inject constructor(
             .map { state ->
                 if (state is State.DataState) {
                     if (state.episodesStatus == FETCHED) {
-                        // TODO open activity
-                        Log.d("Ademar", "> open episodes for ${state.show}")
+                        seasonNavigator.openSeason(state.show.id)
                         state
                     } else {
                         fetchSeasons(state.show)
