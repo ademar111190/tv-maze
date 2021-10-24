@@ -4,6 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SearchResponse(
-    @Json(name = "show") val show: ShowResponse?,
+data class ScheduleResponse(
+    @Json(name = "time") val time: String?,
+    @Json(name = "days") val days: List<String?>?,
 )

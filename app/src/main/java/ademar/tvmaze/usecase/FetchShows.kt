@@ -6,7 +6,7 @@ import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.IO
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
 import ademar.tvmaze.network.api.TvMazeService
-import ademar.tvmaze.network.payload.ShowItem
+import ademar.tvmaze.network.payload.ShowResponse
 import dagger.Reusable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
@@ -33,7 +33,7 @@ class FetchShows @Inject constructor(
 
     fun numberedPage(page: Int): Single<List<Show>> = fetch(service.shows(page))
 
-    private fun fetch(source: Single<List<ShowItem>>): Single<List<Show>> = source
+    private fun fetch(source: Single<List<ShowResponse>>): Single<List<Show>> = source
         .subscribeOn(ioScheduler)
         .observeOn(mainThreadScheduler)
         .map { payload ->

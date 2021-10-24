@@ -8,14 +8,14 @@ import ademar.tvmaze.db.GenreEntity
 import ademar.tvmaze.db.ScheduleDayEntity
 import ademar.tvmaze.db.ShowEntity
 import ademar.tvmaze.db.ShowWithGenreWithScheduleDay
-import ademar.tvmaze.network.payload.ShowItem
+import ademar.tvmaze.network.payload.ShowResponse
 import dagger.Reusable
 import javax.inject.Inject
 
 @Reusable
 class MapShows @Inject constructor() {
 
-    fun mapShow(item: ShowItem): Show? {
+    fun mapShow(item: ShowResponse): Show? {
         val id = item.id ?: return null
         val name = item.name ?: return null
         val image = item.image?.original ?: item.image?.medium ?: return null
