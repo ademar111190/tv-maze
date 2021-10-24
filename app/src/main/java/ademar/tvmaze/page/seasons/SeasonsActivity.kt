@@ -31,6 +31,7 @@ class SeasonsActivity : AppCompatActivity(), Contract.View {
     private val seasonAdapter = SeasonAdapter(object : SeasonsEpisodeCallback {
         override fun onEpisodeClick(id: Long) {
             output.onNext(Command.EpisodeClick(id))
+            output.onNext(Command.None)
         }
     })
 

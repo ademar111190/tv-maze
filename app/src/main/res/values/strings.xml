@@ -36,6 +36,11 @@
     <string name="seasons_page_header">Season %d %s</string>
     <string name="seasons_page_episode">Episode %d %s</string>
 
+    <!-- Episode page -->
+    <string name="episode_no_data">Failed to find the episode, please try again later.</string>
+    <string name="episode_season_title">Season:</string>
+    <string name="episode_number_title">Number:</string>
+
     <!-- Genre titles -->
     <string name="genre_title_action">action</string>
     <string name="genre_title_adventure">adventure</string>

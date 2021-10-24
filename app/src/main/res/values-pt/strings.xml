@@ -36,6 +36,11 @@
     <string name="seasons_page_header">Temporada %d %s</string>
     <string name="seasons_page_episode">Episódio %d %s</string>
 
+    <!-- Episode page -->
+    <string name="episode_no_data">Falha ao carregar o episódio, por favor tente novamente mais tarde.</string>
+    <string name="episode_season_title">Temporada:</string>
+    <string name="episode_number_title">Número:</string>
+
     <!-- Genre titles -->
     <string name="genre_title_action">ação</string>
     <string name="genre_title_adventure">aventura</string>

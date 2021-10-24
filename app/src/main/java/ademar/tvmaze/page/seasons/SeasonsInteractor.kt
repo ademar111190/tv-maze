@@ -6,6 +6,7 @@ import ademar.tvmaze.data.Season
 import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.COMPUTATION
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
+import ademar.tvmaze.page.episode.EpisodeNavigator
 import ademar.tvmaze.page.seasons.Contract.Command
 import ademar.tvmaze.page.seasons.Contract.State
 import ademar.tvmaze.usecase.FetchEpisodes
@@ -25,6 +26,7 @@ class SeasonsInteractor @Inject constructor(
     private val fetchShow: FetchShow,
     private val fetchSeasons: FetchSeasons,
     private val fetchEpisodes: FetchEpisodes,
+    private val episodeNavigator: EpisodeNavigator,
     subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -72,6 +74,7 @@ class SeasonsInteractor @Inject constructor(
     }
 
     private fun episodesClick(episodeId: Long): Observable<State> {
+        episodeNavigator.openEpisode(episodeId)
         return empty()
     }
 

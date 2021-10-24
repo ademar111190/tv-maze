@@ -38,6 +38,10 @@
 
         <activity android:name=".page.seasons.SeasonsActivity" />
 
+        <activity
+            android:name=".page.episode.EpisodeActivity"
+            android:theme="@style/Theme.TVMaze.Detail" />
+
     </application>
 
 </manifest>
