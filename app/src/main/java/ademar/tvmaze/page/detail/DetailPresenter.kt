@@ -49,6 +49,7 @@ class DetailPresenter @Inject constructor(
             is State.DataState -> {
                 Model.ShowModel(
                     show = state.show,
+                    favorite = state.favorite,
                     summary = HtmlCompat.fromHtml(state.show.summary, FROM_HTML_MODE_COMPACT),
                     monday = dayIcon(MONDAY, state.show),
                     tuesday = dayIcon(TUESDAY, state.show),

@@ -7,6 +7,10 @@
     <string name="page_title_search">Busca</string>
     <string name="page_title_favorite">Favoritos</string>
 
+    <!-- Favorite page -->
+    <string name="favorite_action_favorite">Favoritar</string>
+    <string name="favorite_action_unfavorite">Desfavoritar</string>
+
     <!-- Search page -->
     <string name="series_menu_go_to_end">Ir ao final</string>
     <string name="series_menu_sort">Alterar regra de ordenação</string>

@@ -16,6 +16,10 @@ interface Contract {
 
         object EpisodesClick : Command()
 
+        object Favorite : Command()
+
+        object UnFavorite : Command()
+
         object None : Command()
 
     }
@@ -30,6 +34,7 @@ interface Contract {
 
         data class DataState(
             val show: Show,
+            val favorite: Boolean,
             val episodesStatus: EpisodesStatus,
         ) : State()
 
@@ -53,6 +58,7 @@ interface Contract {
 
         data class ShowModel(
             val show: Show,
+            val favorite: Boolean,
             val summary: CharSequence,
             @DrawableRes val monday: Int,
             @DrawableRes val tuesday: Int,

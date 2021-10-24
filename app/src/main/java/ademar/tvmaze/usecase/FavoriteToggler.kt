@@ -13,19 +13,9 @@ import javax.inject.Inject
 @Reusable
 class FavoriteToggler @Inject constructor(
     private val db: AppDatabase,
-    private val favoriteCheck: FavoriteCheck,
     @QualifiedScheduler(IO) private val ioScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
 ) {
-
-    fun toggle(showId: Long): Completable = favoriteCheck.isFavorite(showId)
-        .flatMapCompletable { favorite ->
-            if (favorite) {
-                unfavorite(showId)
-            } else {
-                favorite(showId)
-            }
-        }
 
     fun favorite(showId: Long): Completable = db.favoriteDao()
         .insert(FavoriteEntity(showId))

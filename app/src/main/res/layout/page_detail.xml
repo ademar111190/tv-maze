@@ -440,6 +440,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ToolBarStyle"
+        app:menu="@menu/detail_menu_toolbar"
         app:navigationIcon="@drawable/ic_back_contrast" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

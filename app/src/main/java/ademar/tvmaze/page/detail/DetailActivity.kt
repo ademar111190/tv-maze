@@ -43,6 +43,14 @@ class DetailActivity : AppCompatActivity(), Contract.View {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_detail_favorite -> output.onNext(Command.Favorite)
+                R.id.action_detail_unfavorite -> output.onNext(Command.UnFavorite)
+                else -> null
+            } != null
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container)) { _, insets ->
             val lp = toolbar.layoutParams as CoordinatorLayout.LayoutParams
             lp.setMargins(0, insets.systemWindowInsetTop, 0, 0)
@@ -78,14 +86,31 @@ class DetailActivity : AppCompatActivity(), Contract.View {
     override fun render(model: Model) {
         val edgeCaseContent = findViewById<View>(R.id.edge_case_content)
         val content = findViewById<View>(R.id.content)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val favorite = toolbar.menu.findItem(R.id.action_detail_favorite)
+        val unfavorite = toolbar.menu.findItem(R.id.action_detail_unfavorite)
 
         when (model) {
-            is Model.Loading -> showLoad(edgeCaseContent, content)
-            is Model.Error -> showError(edgeCaseContent, content, model.message)
-            is Model.NoShow -> showError(edgeCaseContent, content, model.message)
+            is Model.Loading -> {
+                showLoad(edgeCaseContent, content)
+                favorite.isVisible = false
+                unfavorite.isVisible = false
+            }
+            is Model.Error -> {
+                showError(edgeCaseContent, content, model.message)
+                favorite.isVisible = false
+                unfavorite.isVisible = false
+            }
+            is Model.NoShow -> {
+                showError(edgeCaseContent, content, model.message)
+                favorite.isVisible = false
+                unfavorite.isVisible = false
+            }
             is Model.ShowModel -> {
                 showContent(edgeCaseContent, content)
                 renderShowModel(model)
+                favorite.isVisible = !model.favorite
+                unfavorite.isVisible = model.favorite
             }
         }
     }

@@ -5,11 +5,15 @@
     <string name="page_title_series">Series</string>
     <string name="page_title_series_enumerated">Series (%d)</string>
     <string name="page_title_search">Search</string>
-    <string name="series_menu_go_to_end">Go to end</string>
-    <string name="series_menu_sort">Change sort rule</string>
     <string name="page_title_favorite">Favorites</string>
 
+    <!-- Favorite page -->
+    <string name="favorite_action_favorite">Favorite</string>
+    <string name="favorite_action_unfavorite">Unfavorite</string>
+
     <!-- Search page -->
+    <string name="series_menu_go_to_end">Go to end</string>
+    <string name="series_menu_sort">Change sort rule</string>
     <string name="search_menu_clear">Clear</string>
     <string name="search_menu_voice">Voice search</string>
     <string name="search_empty">Write the name of the series on the field above.</string>
