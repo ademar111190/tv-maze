@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">TV Maze</string>
+
+    <!-- Pages titles -->
     <string name="page_title_series">Séries</string>
     <string name="page_title_series_enumerated">Séries (%d)</string>
     <string name="page_title_search">Busca</string>
+
+    <!-- Search page -->
     <string name="series_menu_go_to_end">Ir ao final</string>
     <string name="series_menu_sort">Alterar regra de ordenação</string>
     <string name="search_menu_clear">Limpar</string>
     <string name="search_menu_voice">Busca por voz</string>
     <string name="search_empty">Escreva o nome da série no campo de busca acima.</string>
     <string name="search_not_found">Nenhuma série encontrada.</string>
+
+    <!-- Detail page -->
     <string name="detail_no_show">Show não encontrado, por favor tente novamente mais tarde.</string>
     <string name="detail_genres">Gêneros:</string>
     <string name="detail_days">Dias:</string>
@@ -22,6 +28,9 @@
     <string name="detail_day_acronym_saturday">S</string>
     <string name="detail_day_acronym_sunday">D</string>
     <string name="detail_episodes_button">Veja os episódios</string>
+    <string name="detail_episodes_button_retry">Falha ao carregar os episódios, tentar novamente</string>
+
+    <!-- Genre titles -->
     <string name="genre_title_action">ação</string>
     <string name="genre_title_adventure">aventura</string>
     <string name="genre_title_anime">anime</string>
@@ -44,6 +53,8 @@
     <string name="genre_title_thriller">suspense</string>
     <string name="genre_title_war">bélico</string>
     <string name="genre_title_western">ocidental</string>
+
+    <!-- Languages name (as in the the target language) -->
     <string name="language_english">inglês</string>
     <string name="language_japanese">japonês</string>
     <string name="language_portuguese">portugês</string>

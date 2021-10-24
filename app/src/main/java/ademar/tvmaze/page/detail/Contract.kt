@@ -14,6 +14,8 @@ interface Contract {
             val id: Long?,
         ) : Command()
 
+        object EpisodesClick : Command()
+
     }
 
     sealed class State {
@@ -24,10 +26,15 @@ interface Contract {
             val message: String,
         ) : State()
 
-        data class InitialDataState(
+        data class DataState(
             val show: Show,
+            val episodesStatus: EpisodesStatus,
         ) : State()
 
+    }
+
+    enum class EpisodesStatus {
+        FETCHING, FETCHED, ERROR
     }
 
     sealed class Model {
@@ -61,7 +68,7 @@ interface Contract {
 
         object Loading : Episodes()
 
-        data class Available(
+        data class Loaded(
             val callToAction: String,
         ) : Episodes()
 

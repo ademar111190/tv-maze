@@ -20,11 +20,11 @@ class MapShows @Inject constructor() {
         val name = item.name ?: return null
         val image = item.image?.original ?: item.image?.medium ?: return null
         val language = item.language ?: return null
-        val genres = item.genres?.mapNotNull { Genre.fromKeyword(it) }?.sorted() ?: emptyList()
+        val genres = item.genres?.mapNotNull { Genre.fromKeyword(it) }?.sorted()?.toSet() ?: emptySet()
         val rating = item.rating?.average ?: return null
         val summary = item.summary ?: return null
         val time = item.schedule?.time ?: return null
-        val days = item.schedule.days?.mapNotNull { ScheduleDay.fromDay(it) }?.sorted() ?: emptyList()
+        val days = item.schedule.days?.mapNotNull { ScheduleDay.fromDay(it) }?.sorted()?.toSet() ?: emptySet()
         return Show(
             id = id,
             name = name,
@@ -70,11 +70,11 @@ class MapShows @Inject constructor() {
             name = showEntity.show.name,
             image = showEntity.show.image,
             language = showEntity.show.language,
-            genres = showEntity.genres.map { it.genre }.sorted(),
+            genres = showEntity.genres.map { it.genre }.sorted().toSet(),
             rating = showEntity.show.rating,
             summary = showEntity.show.summary,
             time = showEntity.show.time,
-            days = showEntity.scheduleDays.map { it.scheduleDay }.sorted(),
+            days = showEntity.scheduleDays.map { it.scheduleDay }.sorted().toSet(),
         )
     }
 

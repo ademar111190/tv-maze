@@ -29,7 +29,7 @@ class GenreAdapter : RecyclerView.Adapter<GenreViewHolder>() {
     override fun getItemId(position: Int): Long = data[position].ordinal.toLong()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<Genre>) {
+    fun setItems(items: Set<Genre>) {
         data.clear()
         data.addAll(items)
         notifyDataSetChanged()

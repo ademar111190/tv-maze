@@ -53,6 +53,10 @@ class DetailActivity : AppCompatActivity(), Contract.View {
         val genreList = findViewById<RecyclerView>(R.id.genres_list)
         genreList.adapter = genreAdapter
 
+        findViewById<Button>(R.id.episodes_button).setOnClickListener {
+            output.onNext(Command.EpisodesClick)
+        }
+
         archBinder.bind(this, interactor, presenter)
     }
 
@@ -118,7 +122,7 @@ class DetailActivity : AppCompatActivity(), Contract.View {
                 episodesLoad.visibility = VISIBLE
                 episodesButton.visibility = GONE
             }
-            is Contract.Episodes.Available -> {
+            is Contract.Episodes.Loaded -> {
                 episodesLoad.visibility = GONE
                 episodesButton.visibility = VISIBLE
                 episodesButton.text = model.episodes.callToAction

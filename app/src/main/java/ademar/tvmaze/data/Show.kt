@@ -10,8 +10,8 @@ data class Show(
     val summary: String,
     val image: String,
     val time: String,
-    val days: List<ScheduleDay>,
+    val days: Set<ScheduleDay>,
     val language: Language,
-    val genres: List<Genre>,
+    val genres: Set<Genre>,
     val rating: Double,
 ) : Parcelable

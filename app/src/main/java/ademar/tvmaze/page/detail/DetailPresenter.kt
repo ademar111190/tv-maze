@@ -3,10 +3,14 @@ package ademar.tvmaze.page.detail
 import ademar.tvmaze.R
 import ademar.tvmaze.arch.ArchPresenter
 import ademar.tvmaze.data.ScheduleDay
+import ademar.tvmaze.data.ScheduleDay.*
 import ademar.tvmaze.data.Show
 import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.COMPUTATION
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
+import ademar.tvmaze.page.detail.Contract.Episodes.Loaded
+import ademar.tvmaze.page.detail.Contract.Episodes.Loading
+import ademar.tvmaze.page.detail.Contract.EpisodesStatus.*
 import ademar.tvmaze.page.detail.Contract.Model
 import ademar.tvmaze.page.detail.Contract.State
 import android.content.Context
@@ -42,18 +46,22 @@ class DetailPresenter @Inject constructor(
             is State.ErrorState -> Model.Error(
                 state.message,
             )
-            is State.InitialDataState -> {
+            is State.DataState -> {
                 Model.ShowModel(
                     show = state.show,
                     summary = HtmlCompat.fromHtml(state.show.summary, FROM_HTML_MODE_COMPACT),
-                    monday = dayIcon(ScheduleDay.MONDAY, state.show),
-                    tuesday = dayIcon(ScheduleDay.TUESDAY, state.show),
-                    wednesday = dayIcon(ScheduleDay.WEDNESDAY, state.show),
-                    thursday = dayIcon(ScheduleDay.THURSDAY, state.show),
-                    friday = dayIcon(ScheduleDay.FRIDAY, state.show),
-                    saturday = dayIcon(ScheduleDay.SATURDAY, state.show),
-                    sunday = dayIcon(ScheduleDay.SUNDAY, state.show),
-                    episodes = Contract.Episodes.Loading,
+                    monday = dayIcon(MONDAY, state.show),
+                    tuesday = dayIcon(TUESDAY, state.show),
+                    wednesday = dayIcon(WEDNESDAY, state.show),
+                    thursday = dayIcon(THURSDAY, state.show),
+                    friday = dayIcon(FRIDAY, state.show),
+                    saturday = dayIcon(SATURDAY, state.show),
+                    sunday = dayIcon(SUNDAY, state.show),
+                    episodes = when (state.episodesStatus) {
+                        FETCHING -> Loading
+                        FETCHED -> Loaded(context.getString(R.string.detail_episodes_button))
+                        ERROR -> Loaded(context.getString(R.string.detail_episodes_button_retry))
+                    },
                 )
             }
         }

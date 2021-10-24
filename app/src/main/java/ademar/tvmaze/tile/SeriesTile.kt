@@ -50,9 +50,9 @@ class SeriesTile(
             .into(banner)
     }
 
-    private fun applyGenre(genres: List<Genre>, view: ImageView, index: Int) {
+    private fun applyGenre(genres: Set<Genre>, view: ImageView, index: Int) {
         if (genres.size > index) {
-            val genre = genres[index]
+            val genre = genres.toList()[index]
             view.setImageResource(genre.icon)
             view.contentDescription = itemView.context.getString(genre.title)
             view.visibility = View.VISIBLE
