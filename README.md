@@ -4,6 +4,14 @@ An android client for TV Maze content
 
 <img src="assets/ic_launcher-playstore.png" width="128" />
 
+## Download
+
+Download the apk <a href="assets/v1.apk">here</a>
+
+## How it looks like
+
+https://youtu.be/7PGCmSw-AIQ
+
 ## Features
 
 - [X] List all of the series contained in the API used by the paging scheme provided by the API.
@@ -35,6 +43,14 @@ An android client for TV Maze content
     - [ ] Name
     - [ ] Image
     - [ ] Series they have participated in, with a link to the series details.
+
+## Additional Features
+
+- [X] Works Offline (with cached data) including search
+- [X] Shows rating
+- [X] Shows language
+- [X] Shortcuts to series, search and favorites
+- [X] Supports split screen
 
 ## Language icons
 
