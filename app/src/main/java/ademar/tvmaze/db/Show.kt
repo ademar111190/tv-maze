@@ -55,6 +55,10 @@ interface ShowDao {
     fun getAll(): Single<List<ShowWithGenreWithScheduleDay>>
 
     @Transaction
+    @Query("SELECT * FROM shows where id = :id limit 1")
+    fun getById(id: Long): Single<ShowWithGenreWithScheduleDay>
+
+    @Transaction
     @Query("SELECT * FROM shows WHERE name LIKE '%' || :query || '%'")
     fun search(query: String): Single<List<ShowWithGenreWithScheduleDay>>
 

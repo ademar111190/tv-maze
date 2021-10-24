@@ -23,7 +23,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
             <ImageView
                 android:id="@+id/banner"
@@ -36,6 +37,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_name_contrast"
+                app:layout_constraintBottom_toBottomOf="@+id/banner"
+                app:layout_constraintEnd_toEndOf="@+id/banner"
+                app:layout_constraintStart_toStartOf="@+id/banner"
+                app:layout_constraintTop_toTopOf="@+id/banner" />
+
             <TextView
                 android:id="@+id/name"
                 style="@style/TextAppearance.MaterialComponents.Headline3"
@@ -45,6 +55,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
+                android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/banner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +77,7 @@
 
             <TextView
                 android:id="@+id/genres_header"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -135,7 +146,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/day_value_tuesday_bg"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,11 +171,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/day_value_wednesday_bg"
                 app:layout_constraintStart_toEndOf="@+id/day_value_monday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_on">
 
                 <TextView
@@ -185,11 +196,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/day_value_thursday_bg"
                 app:layout_constraintStart_toEndOf="@+id/day_value_tuesday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_off">
 
                 <TextView
@@ -210,11 +221,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/day_value_friday_bg"
                 app:layout_constraintStart_toEndOf="@+id/day_value_wednesday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_off">
 
                 <TextView
@@ -235,11 +246,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/day_value_saturday_bg"
                 app:layout_constraintStart_toEndOf="@+id/day_value_thursday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_on">
 
                 <TextView
@@ -260,11 +271,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/day_value_sunday_bg"
                 app:layout_constraintStart_toEndOf="@+id/day_value_friday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_on">
 
                 <TextView
@@ -286,11 +297,11 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/day_value_monday_bg"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/day_value_saturday_bg"
-                app:layout_constraintTop_toBottomOf="@+id/day_header"
+                app:layout_constraintTop_toTopOf="@+id/day_value_monday_bg"
                 tools:background="@drawable/bg_tile_schedule_day_off">
 
                 <TextView
@@ -314,6 +325,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="start"
                 android:text="@string/detail_episodes"
                 app:layout_constraintEnd_toEndOf="parent"

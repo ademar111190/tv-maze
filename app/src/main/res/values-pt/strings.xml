@@ -8,6 +8,8 @@
     <string name="search_menu_clear">Limpar</string>
     <string name="search_menu_voice">Busca por voz</string>
     <string name="search_empty">Escreva o nome da série no campo de busca acima.</string>
+    <string name="search_not_found">Nenhuma série encontrada.</string>
+    <string name="detail_no_show">Show não encontrado, por favor tente novamente mais tarde.</string>
     <string name="detail_genres">Gêneros:</string>
     <string name="detail_days">Dias:</string>
     <string name="detail_time">Horário:</string>
@@ -19,7 +21,6 @@
     <string name="detail_day_acronym_friday">S</string>
     <string name="detail_day_acronym_saturday">S</string>
     <string name="detail_day_acronym_sunday">D</string>
-    <string name="search_not_found">Nenhuma série encontrada.</string>
     <string name="cd_series_banner">Banner da série</string>
     <string name="cd_series_language">Idioma da série</string>
     <string name="cd_series_genre">Gênero da série</string>

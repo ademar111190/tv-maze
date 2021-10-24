@@ -1,14 +1,13 @@
-package ademar.tvmaze.page.search
+package ademar.tvmaze.page.detail
 
 import ademar.tvmaze.arch.ArchInteractor
 import ademar.tvmaze.di.qualifiers.QualifiedScheduler
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.COMPUTATION
 import ademar.tvmaze.di.qualifiers.QualifiedSchedulerOption.MAIN_THREAD
-import ademar.tvmaze.page.detail.DetailNavigator
-import ademar.tvmaze.page.search.Contract.Command
-import ademar.tvmaze.page.search.Contract.State
-import ademar.tvmaze.usecase.SearchShows
-import dagger.hilt.android.scopes.FragmentScoped
+import ademar.tvmaze.page.detail.Contract.Command
+import ademar.tvmaze.page.detail.Contract.State
+import ademar.tvmaze.usecase.FetchShow
+import dagger.hilt.android.scopes.ActivityScoped
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observable.just
 import io.reactivex.rxjava3.core.Scheduler
@@ -16,10 +15,9 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject.create
 import javax.inject.Inject
 
-@FragmentScoped
-class SearchInteractor @Inject constructor(
-    private val searchShows: SearchShows,
-    private val detailNavigator: DetailNavigator,
+@ActivityScoped
+class DetailInteractor @Inject constructor(
+    private val fetchShow: FetchShow,
     subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -34,34 +32,19 @@ class SearchInteractor @Inject constructor(
     override fun map(
         command: Command,
     ): Observable<State> = when (command) {
-        is Command.Initial -> initial()
-        is Command.Search -> search(command.query)
-        is Command.SeriesSelected -> seriesSelected(command.id)
+        is Command.Initial -> initial(command.id)
     }
 
-    private fun initial(): Observable<State> {
-        return just(State.NoSearch)
-    }
-
-    private fun search(
-        query: String,
-    ): Observable<State> {
-        if (query.isEmpty()) return just(State.NoSearch)
-
-        output.onNext(State.Searching)
-        return searchShows.search(query)
-            .map<State> { shows ->
-                State.SearchResult(
-                    series = shows,
+    private fun initial(id: Long?): Observable<State> {
+        if (id == null) return just(State.InvalidIdState)
+        return fetchShow.byId(id)
+            .map<State> {
+                State.InitialDataState(
+                    show = it,
                 )
             }
             .toObservable()
             .onErrorResumeNext(::mapError)
-    }
-
-    private fun seriesSelected(id: Long): Observable<State> {
-        detailNavigator.openDetail(id)
-        return Observable.empty()
     }
 
 }

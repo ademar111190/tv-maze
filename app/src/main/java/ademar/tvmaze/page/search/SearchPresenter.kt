@@ -9,13 +9,13 @@ import ademar.tvmaze.page.search.Contract.Model
 import ademar.tvmaze.page.search.Contract.State
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject.createDefault
 import javax.inject.Inject
 
-@ActivityScoped
+@FragmentScoped
 class SearchPresenter @Inject constructor(
     @ApplicationContext private val context: Context,
     subscriptions: CompositeDisposable,
