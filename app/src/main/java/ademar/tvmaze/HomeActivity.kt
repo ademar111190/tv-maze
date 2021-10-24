@@ -5,6 +5,7 @@ import ademar.tvmaze.page.series.SeriesFragment
 import ademar.tvmaze.widget.Reselectable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (supportFragmentManager.fragments.isEmpty()) {
+        if (lastFragmentOrNull() == null) {
             finish()
         }
     }
@@ -28,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setUpNavigation() {
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         navigation.setOnItemReselectedListener { menu ->
-            val current = supportFragmentManager.fragments.lastOrNull()
+            val current = lastFragmentOrNull()
             val itemId = menu.itemId
             if (current is Reselectable) current.onReselected()
             if (current == null && itemId == R.id.navigation_series) {
@@ -59,11 +60,11 @@ class HomeActivity : AppCompatActivity() {
                 transaction.addToBackStack("$fragment")
                 transaction.commitAllowingStateLoss()
             }
-            false
+            true
         }
         navigation.selectedItemId = R.id.navigation_series
         supportFragmentManager.addOnBackStackChangedListener {
-            val id = when (supportFragmentManager.fragments.lastOrNull()) {
+            val id = when (lastFragmentOrNull()) {
                 is SeriesFragment -> R.id.navigation_series
                 is SearchFragment -> R.id.navigation_search
                 else -> null
@@ -79,6 +80,12 @@ class HomeActivity : AppCompatActivity() {
         }
         if (initial != null) {
             navigation.selectedItemId = initial
+        }
+    }
+
+    private fun lastFragmentOrNull(): Fragment? {
+        return supportFragmentManager.fragments.findLast { frag ->
+            frag is SeriesFragment || frag is SearchFragment
         }
     }
 
