@@ -22,14 +22,14 @@ data class ShowEntity(
 @Entity(tableName = "genres")
 data class GenreEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0L,
-    @ColumnInfo(name = "showId") val showId: Long,
+    @ColumnInfo(name = "show_id") val showId: Long,
     @ColumnInfo(name = "genre") val genre: Genre,
 )
 
 @Entity(tableName = "schedule_days")
 data class ScheduleDayEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0L,
-    @ColumnInfo(name = "showId") val showId: Long,
+    @ColumnInfo(name = "show_id") val showId: Long,
     @ColumnInfo(name = "schedule_day") val scheduleDay: ScheduleDay,
 )
 
@@ -37,12 +37,12 @@ data class ShowWithGenreWithScheduleDay(
     @Embedded val show: ShowEntity,
     @Relation(
         parentColumn = "id",
-        entityColumn = "showId",
+        entityColumn = "show_id",
     )
     val genres: List<GenreEntity>,
     @Relation(
         parentColumn = "id",
-        entityColumn = "showId",
+        entityColumn = "show_id",
     )
     val scheduleDays: List<ScheduleDayEntity>,
 )
@@ -71,10 +71,10 @@ interface ShowDao {
     @Insert(onConflict = REPLACE)
     fun insert(scheduleDay: ScheduleDayEntity): Completable
 
-    @Query("DELETE FROM genres WHERE showId = :showId")
+    @Query("DELETE FROM genres WHERE show_id = :showId")
     fun clearGenres(showId: Long): Completable
 
-    @Query("DELETE FROM schedule_days WHERE showId = :showId")
+    @Query("DELETE FROM schedule_days WHERE show_id = :showId")
     fun clearScheduleDay(showId: Long): Completable
 
 }

@@ -5,8 +5,10 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
+        EpisodeEntity::class,
         GenreEntity::class,
         ScheduleDayEntity::class,
+        SeasonEntity::class,
         ShowEntity::class,
     ],
     version = 1,
@@ -14,6 +16,10 @@ import androidx.room.RoomDatabase
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun showDao(): ShowDao
+
+    abstract fun seasonDao(): SeasonDao
+
+    abstract fun episodeDao(): EpisodeDao
 
 }
 
