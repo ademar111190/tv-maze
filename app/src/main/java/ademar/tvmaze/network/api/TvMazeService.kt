@@ -1,9 +1,12 @@
 package ademar.tvmaze.network.api
 
+import ademar.tvmaze.network.payload.EpisodeResponse
 import ademar.tvmaze.network.payload.SearchResponse
+import ademar.tvmaze.network.payload.SeasonResponse
 import ademar.tvmaze.network.payload.ShowResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TvMazeService {
@@ -17,5 +20,15 @@ interface TvMazeService {
     fun search(
         @Query("q") query: String,
     ): Single<List<SearchResponse>>
+
+    @GET("/shows/{showId}/seasons")
+    fun seasons(
+        @Path("showId") showId: Long,
+    ): Single<List<SeasonResponse>>
+
+    @GET("/seasons/{seasonId}/episodes")
+    fun episodes(
+        @Path("seasonId") seasonId: Long,
+    ): Single<List<EpisodeResponse>>
 
 }
