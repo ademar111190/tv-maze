@@ -2,17 +2,19 @@ package ademar.tvmaze.data
 
 import ademar.tvmaze.R
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import timber.log.Timber
 
 enum class Language(
     @DrawableRes val icon: Int,
+    @StringRes val title: Int,
 ) {
 
-    ENGLISH(R.drawable.lang_english),
-    JAPANESE(R.drawable.lang_japanese),
-    PORTUGUESE(R.drawable.lang_portuguese),
-    SPANISH(R.drawable.lang_spanish),
-    OTHER(R.drawable.lang_other);
+    ENGLISH(R.drawable.lang_english, R.string.language_english),
+    JAPANESE(R.drawable.lang_japanese, R.string.language_japanese),
+    PORTUGUESE(R.drawable.lang_portuguese, R.string.language_portuguese),
+    SPANISH(R.drawable.lang_spanish, R.string.language_spanish),
+    OTHER(R.drawable.lang_other, R.string.language_other);
 
     companion object {
 

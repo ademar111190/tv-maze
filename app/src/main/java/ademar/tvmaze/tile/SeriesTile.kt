@@ -36,6 +36,7 @@ class SeriesTile(
         name.text = show.name
         ratingValue.text = show.rating.toString()
         language.setImageResource(show.language.icon)
+        language.contentDescription = itemView.context.getString(show.language.title)
 
         applyGenre(show.genres, genre3, 2)
         applyGenre(show.genres, genre2, 1)
@@ -49,12 +50,14 @@ class SeriesTile(
             .into(banner)
     }
 
-    private fun applyGenre(genres: List<Genre>, genre: ImageView, index: Int) {
+    private fun applyGenre(genres: List<Genre>, view: ImageView, index: Int) {
         if (genres.size > index) {
-            genre.setImageResource(genres[index].icon)
-            genre.visibility = View.VISIBLE
+            val genre = genres[index]
+            view.setImageResource(genre.icon)
+            view.contentDescription = itemView.context.getString(genre.title)
+            view.visibility = View.VISIBLE
         } else {
-            genre.visibility = View.INVISIBLE
+            view.visibility = View.INVISIBLE
         }
     }
 

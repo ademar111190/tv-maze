@@ -9,9 +9,9 @@ import ademar.tvmaze.widget.EdgeCaseContent.showError
 import ademar.tvmaze.widget.EdgeCaseContent.showLoad
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
@@ -73,10 +73,18 @@ class DetailActivity : AppCompatActivity(), Contract.View {
         val name = findViewById<TextView>(R.id.name)
         val summary = findViewById<TextView>(R.id.summary)
         val timeValue = findViewById<TextView>(R.id.time_value)
+        val ratingValue = findViewById<TextView>(R.id.rating_value)
+        val language = findViewById<ImageView>(R.id.language)
+        val languageTitle = findViewById<TextView>(R.id.language_title)
+        val episodesLoad = findViewById<ProgressBar>(R.id.episodes_load)
+        val episodesButton = findViewById<Button>(R.id.episodes_button)
 
         name.text = model.show.name
         summary.text = model.summary
         timeValue.text = model.show.time
+        ratingValue.text = model.show.rating.toString()
+        language.setImageResource(model.show.language.icon)
+        languageTitle.setText(model.show.language.title)
 
         genreAdapter.setItems(model.show.genres)
         Glide.with(this)
@@ -95,6 +103,18 @@ class DetailActivity : AppCompatActivity(), Contract.View {
             R.id.day_value_sunday_bg to model.sunday,
         )) {
             findViewById<FrameLayout>(id).setBackgroundResource(bg)
+        }
+
+        when (model.episodes) {
+            is Contract.Episodes.Loading -> {
+                episodesLoad.visibility = VISIBLE
+                episodesButton.visibility = GONE
+            }
+            is Contract.Episodes.Available -> {
+                episodesLoad.visibility = GONE
+                episodesButton.visibility = VISIBLE
+                episodesButton.text = model.episodes.callToAction
+            }
         }
     }
 

@@ -53,6 +53,7 @@ class DetailPresenter @Inject constructor(
                     friday = dayIcon(ScheduleDay.FRIDAY, state.show),
                     saturday = dayIcon(ScheduleDay.SATURDAY, state.show),
                     sunday = dayIcon(ScheduleDay.SUNDAY, state.show),
+                    episodes = Contract.Episodes.Loading,
                 )
             }
         }

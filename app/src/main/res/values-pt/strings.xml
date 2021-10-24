@@ -21,8 +21,40 @@
     <string name="detail_day_acronym_friday">S</string>
     <string name="detail_day_acronym_saturday">S</string>
     <string name="detail_day_acronym_sunday">D</string>
+    <string name="detail_episodes_button">Veja os episódios</string>
+    <string name="genre_title_action">ação</string>
+    <string name="genre_title_adventure">aventura</string>
+    <string name="genre_title_anime">anime</string>
+    <string name="genre_title_comedy">comédia</string>
+    <string name="genre_title_crime">crime</string>
+    <string name="genre_title_drama">drama</string>
+    <string name="genre_title_espionage">espionagem</string>
+    <string name="genre_title_family">familiar</string>
+    <string name="genre_title_fantasy">fantasia</string>
+    <string name="genre_title_history">história</string>
+    <string name="genre_title_horror">terror</string>
+    <string name="genre_title_legal">legal</string>
+    <string name="genre_title_medical">médico</string>
+    <string name="genre_title_music">musical</string>
+    <string name="genre_title_mystery">mistério</string>
+    <string name="genre_title_romance">romance</string>
+    <string name="genre_title_science_fiction">ficção científica</string>
+    <string name="genre_title_sports">esportes</string>
+    <string name="genre_title_supernatural">sobrenatural</string>
+    <string name="genre_title_thriller">suspense</string>
+    <string name="genre_title_war">bélico</string>
+    <string name="genre_title_western">ocidental</string>
+    <string name="language_english">inglês</string>
+    <string name="language_japanese">japonês</string>
+    <string name="language_portuguese">portugês</string>
+    <string name="language_spanish">espanhol</string>
+    <string name="language_other">outro</string>
+
+    <!-- Contend description -->
+    <string name="cd_rating">Avaliação</string>
     <string name="cd_series_banner">Banner da série</string>
-    <string name="cd_series_language">Idioma da série</string>
     <string name="cd_series_genre">Gênero da série</string>
+    <string name="cd_series_language">Idioma da série</string>
     <string name="cd_series_rating">Nota da série</string>
+
 </resources>

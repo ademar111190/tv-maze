@@ -52,7 +52,18 @@ interface Contract {
             @DrawableRes val friday: Int,
             @DrawableRes val saturday: Int,
             @DrawableRes val sunday: Int,
+            val episodes: Episodes,
         ) : Model()
+
+    }
+
+    sealed class Episodes {
+
+        object Loading : Episodes()
+
+        data class Available(
+            val callToAction: String,
+        ) : Episodes()
 
     }
 

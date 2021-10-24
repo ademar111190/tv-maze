@@ -100,6 +100,62 @@
                 app:layout_constraintTop_toBottomOf="@+id/genres_header"
                 tools:listitem="@layout/item_detail_genre" />
 
+            <ImageView
+                android:id="@+id/rating"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/cd_rating"
+                android:src="@drawable/ic_rating"
+                app:layout_constraintBottom_toTopOf="@+id/time_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genres_list" />
+
+            <TextView
+                android:id="@+id/rating_value"
+                style="@style/TextAppearance.MaterialComponents.Headline4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="end"
+                android:textColor="@color/slot3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintStart_toEndOf="@+id/rating"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                tools:text="8.5" />
+
+            <ImageView
+                android:id="@+id/language"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintStart_toEndOf="@+id/rating_value"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                tools:src="@drawable/lang_other" />
+
+            <TextView
+                android:id="@+id/language_title"
+                style="@style/TextAppearance.MaterialComponents.Headline4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="start"
+                android:lines="1"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/language"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                tools:text="@string/language_other" />
+
             <TextView
                 android:id="@+id/time_header"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -112,7 +168,7 @@
                 android:text="@string/detail_time"
                 app:layout_constraintEnd_toStartOf="@+id/time_value"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genres_list" />
+                app:layout_constraintTop_toBottomOf="@+id/rating" />
 
             <TextView
                 android:id="@+id/time_value"
@@ -331,6 +387,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/day_value_monday_bg" />
+
+            <ProgressBar
+                android:id="@+id/episodes_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodes_header"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/episodes_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:drawableEnd="@drawable/ic_chevron_page_details_see_episodes"
+                android:gravity="start|center"
+                android:minHeight="64dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/detail_episodes_button"
+                android:textColor="@color/slot3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodes_header"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
