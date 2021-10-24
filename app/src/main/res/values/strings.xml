@@ -7,6 +7,7 @@
     <string name="page_title_search">Search</string>
     <string name="series_menu_go_to_end">Go to end</string>
     <string name="series_menu_sort">Change sort rule</string>
+    <string name="page_title_favorite">Favorites</string>
 
     <!-- Search page -->
     <string name="search_menu_clear">Clear</string>

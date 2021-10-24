@@ -1,5 +1,6 @@
 package ademar.tvmaze
 
+import ademar.tvmaze.page.favorite.FavoriteFragment
 import ademar.tvmaze.page.search.SearchFragment
 import ademar.tvmaze.page.series.SeriesFragment
 import ademar.tvmaze.widget.Reselectable
@@ -48,6 +49,7 @@ class HomeActivity : AppCompatActivity() {
                     SeriesFragment()
                 }
                 R.id.navigation_search -> SearchFragment()
+                R.id.navigation_favorite -> FavoriteFragment()
                 else -> null
             }
             if (fragment != null) {
@@ -67,6 +69,7 @@ class HomeActivity : AppCompatActivity() {
             val id = when (lastFragmentOrNull()) {
                 is SeriesFragment -> R.id.navigation_series
                 is SearchFragment -> R.id.navigation_search
+                is FavoriteFragment -> R.id.navigation_favorite
                 else -> null
             }
             if (id != null) {
@@ -76,6 +79,7 @@ class HomeActivity : AppCompatActivity() {
         val initial = when (intent?.extras?.getString("INITIAL_ACTION", null)) {
             "ademar.tvmaze.action.series" -> R.id.navigation_series
             "ademar.tvmaze.action.search" -> R.id.navigation_search
+            "ademar.tvmaze.action.favorite" -> R.id.navigation_favorite
             else -> null
         }
         if (initial != null) {
@@ -85,7 +89,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun lastFragmentOrNull(): Fragment? {
         return supportFragmentManager.fragments.findLast { frag ->
-            frag is SeriesFragment || frag is SearchFragment
+            frag is SeriesFragment ||
+                    frag is SearchFragment ||
+                    frag is FavoriteFragment
         }
     }
 

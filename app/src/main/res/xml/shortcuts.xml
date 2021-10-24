@@ -29,4 +29,17 @@
             android:targetPackage="ademar.tvmaze" />
     </shortcut>
 
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_shortcut"
+        android:shortcutDisabledMessage="@string/page_title_favorite"
+        android:shortcutId="favorite"
+        android:shortcutLongLabel="@string/page_title_favorite"
+        android:shortcutShortLabel="@string/page_title_favorite">
+        <intent
+            android:action="ademar.tvmaze.action.favorite"
+            android:targetClass="ademar.tvmaze.StartActivity"
+            android:targetPackage="ademar.tvmaze" />
+    </shortcut>
+
 </shortcuts>

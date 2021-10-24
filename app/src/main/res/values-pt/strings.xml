@@ -5,6 +5,7 @@
     <string name="page_title_series">Séries</string>
     <string name="page_title_series_enumerated">Séries (%d)</string>
     <string name="page_title_search">Busca</string>
+    <string name="page_title_favorite">Favoritos</string>
 
     <!-- Search page -->
     <string name="series_menu_go_to_end">Ir ao final</string>
