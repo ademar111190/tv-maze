@@ -61,10 +61,20 @@
     <string name="genre_title_western">western</string>
 
     <!-- Languages name (as in the the target language) -->
+    <string name="language_chinese">chinese</string>
+    <string name="language_dutch">dutch</string>
     <string name="language_english">english</string>
+    <string name="language_french">french</string>
+    <string name="language_german">german</string>
     <string name="language_japanese">japanese</string>
+    <string name="language_korean">korean</string>
+    <string name="language_polish">polish</string>
     <string name="language_portuguese">portuguese</string>
+    <string name="language_russian">russian</string>
     <string name="language_spanish">spanish</string>
+    <string name="language_swedish">swedish</string>
+    <string name="language_turkish">turkish</string>
+    <string name="language_ukrainian">ukrainian</string>
     <string name="language_other">other</string>
 
     <!-- Contend description -->

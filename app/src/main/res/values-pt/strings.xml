@@ -61,10 +61,20 @@
     <string name="genre_title_western">ocidental</string>
 
     <!-- Languages name (as in the the target language) -->
+    <string name="language_chinese">chines</string>
+    <string name="language_dutch">holandes</string>
     <string name="language_english">inglês</string>
+    <string name="language_french">francês</string>
+    <string name="language_german">alemão</string>
     <string name="language_japanese">japonês</string>
+    <string name="language_korean">coreano</string>
+    <string name="language_polish">polonês</string>
     <string name="language_portuguese">portugês</string>
+    <string name="language_russian">russo</string>
     <string name="language_spanish">espanhol</string>
+    <string name="language_swedish">suéco</string>
+    <string name="language_turkish">turco</string>
+    <string name="language_ukrainian">ucraniano</string>
     <string name="language_other">outro</string>
 
     <!-- Contend description -->
