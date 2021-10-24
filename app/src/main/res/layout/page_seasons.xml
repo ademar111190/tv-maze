@@ -28,4 +28,19 @@
 
     <include layout="@layout/include_edge_case_content" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:fastScrollEnabled="true"
+        app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+        app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+        app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+        app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_seasons_episode"
+        tools:visibility="visible" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

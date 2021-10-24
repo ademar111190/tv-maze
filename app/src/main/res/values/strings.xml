@@ -30,6 +30,12 @@
     <string name="detail_episodes_button">See episodes</string>
     <string name="detail_episodes_button_retry">Failed to load episodes, try again</string>
 
+    <!-- Seasons page -->
+    <string name="seasons_page_title">Episodes of %s</string>
+    <string name="seasons_page_fail_to_load">Failed to load episodes, please try again later.</string>
+    <string name="seasons_page_header">Season %d %s</string>
+    <string name="seasons_page_episode">Episode %d %s</string>
+
     <!-- Genre titles -->
     <string name="genre_title_action">action</string>
     <string name="genre_title_adventure">adventure</string>

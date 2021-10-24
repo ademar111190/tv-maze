@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @ActivityScoped
-class SeasonNavigator @Inject constructor(
+class SeasonsNavigator @Inject constructor(
     @ActivityContext context: Context,
 ) {
 
@@ -17,7 +17,7 @@ class SeasonNavigator @Inject constructor(
 
     fun openSeason(showId: Long) {
         activityRef.get()?.let { activity ->
-            val intent = Intent(activity, SeasonActivity::class.java)
+            val intent = Intent(activity, SeasonsActivity::class.java)
             intent.putExtra("SHOW_ID", showId)
             activity.startActivity(intent)
         }

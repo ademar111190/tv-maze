@@ -9,7 +9,7 @@ import ademar.tvmaze.ext.valueOrError
 import ademar.tvmaze.page.detail.Contract.Command
 import ademar.tvmaze.page.detail.Contract.EpisodesStatus.*
 import ademar.tvmaze.page.detail.Contract.State
-import ademar.tvmaze.page.seasons.SeasonNavigator
+import ademar.tvmaze.page.seasons.SeasonsNavigator
 import ademar.tvmaze.usecase.FetchEpisodes
 import ademar.tvmaze.usecase.FetchSeasons
 import ademar.tvmaze.usecase.FetchShow
@@ -28,7 +28,7 @@ class DetailInteractor @Inject constructor(
     private val fetchShow: FetchShow,
     private val fetchSeasons: FetchSeasons,
     private val fetchEpisodes: FetchEpisodes,
-    private val seasonNavigator: SeasonNavigator,
+    private val seasonsNavigator: SeasonsNavigator,
     private val subscriptions: CompositeDisposable,
     @QualifiedScheduler(COMPUTATION) private val computationScheduler: Scheduler,
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
@@ -70,7 +70,7 @@ class DetailInteractor @Inject constructor(
             .map { state ->
                 if (state is State.DataState) {
                     if (state.episodesStatus == FETCHED) {
-                        seasonNavigator.openSeason(state.show.id)
+                        seasonsNavigator.openSeason(state.show.id)
                         state
                     } else {
                         fetchSeasons(state.show)

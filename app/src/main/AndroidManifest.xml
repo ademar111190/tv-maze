@@ -36,7 +36,7 @@
             android:name=".page.detail.DetailActivity"
             android:theme="@style/Theme.TVMaze.Detail" />
 
-        <activity android:name=".page.seasons.SeasonActivity" />
+        <activity android:name=".page.seasons.SeasonsActivity" />
 
     </application>
 
