@@ -10,6 +10,7 @@
     <!-- Favorite page -->
     <string name="favorite_action_favorite">Favoritar</string>
     <string name="favorite_action_unfavorite">Desfavoritar</string>
+    <string name="favorite_empty">Você não tem nenhum série em seus favoritos, assim que você favoritar uma série, ela aparecerá aqui.</string>
 
     <!-- Search page -->
     <string name="series_menu_go_to_end">Ir ao final</string>

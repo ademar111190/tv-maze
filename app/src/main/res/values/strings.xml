@@ -10,6 +10,7 @@
     <!-- Favorite page -->
     <string name="favorite_action_favorite">Favorite</string>
     <string name="favorite_action_unfavorite">Unfavorite</string>
+    <string name="favorite_empty">You do not have favorites yet, when you favorite a series it will appear here.</string>
 
     <!-- Search page -->
     <string name="series_menu_go_to_end">Go to end</string>

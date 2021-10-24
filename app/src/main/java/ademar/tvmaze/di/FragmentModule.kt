@@ -1,12 +1,14 @@
 package ademar.tvmaze.di
 
 import ademar.tvmaze.di.FragmentModule.Declarations
+import ademar.tvmaze.page.favorite.FavoriteFragment
 import ademar.tvmaze.page.search.SearchFragment
 import ademar.tvmaze.page.series.SeriesFragment
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
+import ademar.tvmaze.page.favorite.Contract as FavoriteContract
 import ademar.tvmaze.page.search.Contract as SearchContract
 import ademar.tvmaze.page.series.Contract as SeriesContract
 
@@ -16,6 +18,8 @@ object FragmentModule {
 
     @[Module InstallIn(FragmentComponent::class)]
     interface Declarations {
+
+        @Binds fun bindFavoriteView(impl: FavoriteFragment): FavoriteContract.View
 
         @Binds fun bindSearchView(impl: SearchFragment): SearchContract.View
 
