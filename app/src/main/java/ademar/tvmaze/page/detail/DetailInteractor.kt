@@ -48,12 +48,15 @@ class DetailInteractor @Inject constructor(
     private fun initial(id: Long?): Observable<State> {
         if (id == null) return just(State.InvalidIdState)
         return fetchShow.byId(id)
-            .doOnSuccess(::fetchSeasons)
-            .map<State> {
-                State.DataState(
-                    show = it,
-                    episodesStatus = FETCHING,
-                )
+            .flatMap<State> { show ->
+                fetchSeasons.isCached(show)
+                    .map { cached ->
+                        fetchSeasons(show)
+                        State.DataState(
+                            show = show,
+                            episodesStatus = if (cached) FETCHED else FETCHING,
+                        )
+                    }
             }
             .toObservable()
             .onErrorResumeNext(::mapError)

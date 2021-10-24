@@ -15,6 +15,7 @@
     <style name="Theme.TVMaze.Detail">
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:statusBarColor">@color/gray_slot1</item>
+        <item name="android:navigationBarColor">@color/gray_slot1</item>
     </style>
 
     <style name="BottomNavigationStyle"

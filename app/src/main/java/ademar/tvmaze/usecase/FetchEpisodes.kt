@@ -22,7 +22,8 @@ class FetchEpisodes @Inject constructor(
     @QualifiedScheduler(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
 ) {
 
-    fun cached(): Single<List<Episode>> = db.episodeDao().getAll()
+    fun cached(season: Season): Single<List<Episode>> = db.episodeDao()
+        .getAllBySeasonId(season.id)
         .subscribeOn(ioScheduler)
         .observeOn(mainThreadScheduler)
         .map { entity ->

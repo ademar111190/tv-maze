@@ -22,6 +22,9 @@ interface EpisodeDao {
     @Query("SELECT * FROM episodes")
     fun getAll(): Single<List<EpisodeEntity>>
 
+    @Query("SELECT * FROM episodes where season_id = :seasonId")
+    fun getAllBySeasonId(seasonId: Long): Single<List<EpisodeEntity>>
+
     @Insert(onConflict = REPLACE)
     fun insert(episodeEntity: EpisodeEntity): Completable
 

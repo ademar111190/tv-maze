@@ -19,6 +19,12 @@ interface SeasonDao {
     @Query("SELECT * FROM seasons")
     fun getAll(): Single<List<SeasonEntity>>
 
+    @Query("SELECT * FROM seasons where show_id = :showId")
+    fun getAllByShowId(showId: Long): Single<List<SeasonEntity>>
+
+    @Query("SELECT COUNT(id) FROM seasons where show_id = :showId")
+    fun count(showId: Long): Single<Int>
+
     @Insert(onConflict = REPLACE)
     fun insert(seasonEntity: SeasonEntity): Completable
 
