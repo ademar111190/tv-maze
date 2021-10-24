@@ -32,7 +32,9 @@
 
         <activity android:name=".HomeActivity" />
 
-        <activity android:name=".page.detail.DetailActivity" />
+        <activity
+            android:name=".page.detail.DetailActivity"
+            android:theme="@style/Theme.TVMaze.Detail" />
 
     </application>
 

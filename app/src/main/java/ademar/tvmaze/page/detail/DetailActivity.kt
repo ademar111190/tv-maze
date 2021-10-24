@@ -14,12 +14,14 @@ import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.subjects.PublishSubject.create
+import io.reactivex.rxjava3.subjects.BehaviorSubject.create
 import io.reactivex.rxjava3.subjects.Subject
 import javax.inject.Inject
 
@@ -41,6 +43,12 @@ class DetailActivity : AppCompatActivity(), Contract.View {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener { finish() }
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container)) { _, insets ->
+            val lp = toolbar.layoutParams as CoordinatorLayout.LayoutParams
+            lp.setMargins(0, insets.systemWindowInsetTop, 0, 0)
+            toolbar.layoutParams = lp
+            insets.consumeSystemWindowInsets()
+        }
 
         val genreList = findViewById<RecyclerView>(R.id.genres_list)
         genreList.adapter = genreAdapter
