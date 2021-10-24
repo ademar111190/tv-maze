@@ -6,6 +6,7 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [
         EpisodeEntity::class,
+        FavoriteEntity::class,
         GenreEntity::class,
         ScheduleDayEntity::class,
         SeasonEntity::class,
@@ -20,6 +21,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun seasonDao(): SeasonDao
 
     abstract fun episodeDao(): EpisodeDao
+
+    abstract fun favoriteDao(): FavoriteDao
 
 }
 
