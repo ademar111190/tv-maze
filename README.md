@@ -51,6 +51,10 @@ https://youtu.be/7PGCmSw-AIQ
 - [X] Shows language
 - [X] Shortcuts to series, search and favorites
 - [X] Supports split screen
+- [X] Day/Night theme
+- [X] PT support (incomplete as the API data is not localized)
+- [X] Shrink and obfuscate, APK ~2.7Mb
+- [X] Adaptative icon
 
 ## Language icons
 
